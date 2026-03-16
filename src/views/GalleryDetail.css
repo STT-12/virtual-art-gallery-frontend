@@ -1,0 +1,1722 @@
+
+/* ==================== CSS变量定义 ==================== */
+.gallery-detail-page {
+  --cosmic-purple: #6c5ce7;
+  --cosmic-blue: #0984e3;
+  --cosmic-green: #00b894;
+  --cosmic-red: #ff6b6b;
+  --cosmic-yellow: #feca57;
+  --cosmic-dark: #2d3436;
+  --cosmic-light: #dfe6e9;
+}
+
+/* ==================== 页面基础样式 ==================== */
+.gallery-detail-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 20px;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 50%, #2d2d5a 100%);
+  font-family: 'Arial', sans-serif;
+}
+
+/* ==================== 星空背景 ==================== */
+.starry-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 50%, #2d2d5a 100%);
+  z-index: -3;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 50%;
+  animation: twinkle linear infinite;
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.9),
+    0 0 30px rgba(255, 255, 255, 0.6),
+    0 0 45px rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ==================== 流星特效 ==================== */
+.meteor-shower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.meteor {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 100%);
+  border-radius: 50%;
+  filter: blur(1px);
+  animation: meteorFall 3s linear infinite;
+}
+
+@keyframes meteorFall {
+  0% {
+    transform: translateX(0) translateY(0) rotate(45deg);
+    opacity: 1;
+    width: 2px;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(500px) translateY(500px) rotate(45deg);
+    opacity: 0;
+    width: 100px;
+  }
+}
+
+/* ==================== 磨砂玻璃层 ==================== */
+.frosted-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: -1;
+}
+
+/* ==================== 主题背景样式 - 修复版 ==================== */
+/* 星空主题 - 深蓝色渐变 */
+.gallery-detail-content.theme-starry,
+.artworks-container.theme-starry {
+
+  border-color: rgba(74, 105, 189, 0.4);
+  box-shadow:
+    0 25px 50px rgba(12, 36, 97, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(74, 105, 189, 0.4);
+}
+
+/* 暗夜主题 - 深紫色/黑色渐变 */
+.gallery-detail-content.theme-night,
+.artworks-container.theme-night {
+  border-color: rgba(15, 52, 96, 0.4);
+  box-shadow:
+    0 25px 50px rgba(26, 26, 46, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(15, 52, 96, 0.4);
+}
+
+/* 复古主题 - 棕色/木质渐变 */
+.gallery-detail-content.theme-retro,
+.artworks-container.theme-retro {
+  background: linear-gradient(135deg,
+    rgba(235, 159, 164, 0.95),  /* 鞍棕色 */
+    rgba(220, 169, 194, 0.9),   /* 赭石色 */
+    rgba(235, 245, 176, 0.85)); /* 巧克力色 */
+  border-color: rgba(247, 108, 108, 0.4);
+  box-shadow:
+    0 25px 50px rgba(139, 69, 19, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(210, 105, 30, 0.4);
+}
+
+/* 简约主题 - 浅灰/白色渐变 */
+.gallery-detail-content.theme-simple,
+.artworks-container.theme-simple {
+  background: linear-gradient(135deg,
+    rgba(245, 247, 250, 0.95),  /* 极浅灰 */
+    rgba(223, 230, 233, 0.9),   /* 浅灰 */
+    rgba(195, 207, 226, 0.85)); /* 灰蓝色 */
+  border-color: rgba(173, 181, 189, 0.4);
+  box-shadow:
+    0 25px 50px rgba(223, 230, 233, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(223, 230, 233, 0.4);
+}
+
+/* 经典主题 - 深灰/蓝色渐变 */
+.gallery-detail-content.theme-classic,
+.artworks-container.theme-classic {
+  background: linear-gradient(135deg,
+    rgba(44, 62, 80, 0.95),
+    rgba(74, 100, 145, 0.9),
+    rgba(44, 62, 80, 0.85));
+  border: 2px solid rgba(189, 195, 199, 0.5);
+  box-shadow:
+    0 25px 50px rgba(44, 62, 80, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(189, 195, 199, 0.4);
+}
+
+/* 现代主题 - 红色/蓝绿色渐变 */
+.gallery-detail-content.theme-modern,
+.artworks-container.theme-modern {
+  background: linear-gradient(135deg,
+    rgba(255, 107, 107, 0.95),
+    rgba(78, 205, 196, 0.9),
+    rgba(69, 183, 209, 0.85));
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 25px 50px rgba(255, 107, 107, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(78, 205, 196, 0.4);
+}
+
+/* 抽象主题 - 紫色渐变 */
+.gallery-detail-content.theme-abstract,
+.artworks-container.theme-abstract {
+  background: linear-gradient(135deg,
+    rgba(108, 92, 231, 0.95),
+    rgba(162, 155, 254, 0.9),
+    rgba(108, 92, 231, 0.85));
+  border: 2px solid rgba(162, 155, 254, 0.5);
+  box-shadow:
+    0 25px 50px rgba(108, 92, 231, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(162, 155, 254, 0.4);
+}
+
+/* ==================== 主题背景层 ==================== */
+.theme-background-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.3;
+  z-index: -1;
+  border-radius: 15px;
+}
+
+/* ==================== 工作区背景效果 ==================== */
+.workspace-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 2px, transparent 2px),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+  background-size: 200px 200px;
+  animation: starsMove 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes starsMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 200px 200px; }
+}
+
+.workspace-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.workspace-nebula {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(106, 90, 205, 0.1) 0%,
+    transparent 70%);
+  pointer-events: none;
+  animation: nebulaFloat 30s ease-in-out infinite;
+}
+
+@keyframes nebulaFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -20px) scale(1.1); }
+}
+
+/* ==================== 墙壁效果 ==================== */
+.gallery-wall {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg,
+    rgba(139, 69, 19, 0.1) 0%,
+    rgba(160, 82, 45, 0.2) 50%,
+    rgba(139, 69, 19, 0.1) 100%);
+  pointer-events: none;
+}
+
+.wall-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+  background-size: 100px 100px;
+  opacity: 0.3;
+}
+
+.wall-lighting {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(180deg,
+    rgba(255, 215, 0, 0.3) 0%,
+    transparent 100%);
+  filter: blur(20px);
+}
+
+/* ==================== 主要容器 ==================== */
+.detail-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 返回按钮 ==================== */
+.detail-back-btn {
+  margin-bottom: 20px;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.08));
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.detail-back-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent);
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+
+.detail-back-btn:hover {
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.2),
+    rgba(255,255,255,0.12));
+  border-color: rgba(255,255,255,0.35);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.detail-back-btn:hover::before {
+  left: 100%;
+}
+
+.detail-back-btn .btn-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.detail-back-btn .icon {
+  font-size: 1.2rem;
+}
+
+/* ==================== 画廊详情内容 ==================== */
+.gallery-detail-content {
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.gallery-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.fluorescent-title {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg,
+    #ffd700 0%,
+    #ff9d00 25%,
+    #ff6b6b 50%,
+    #4ecdc4 75%,
+    #9370db 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 0 20px rgba(255, 215, 0, 0.8),
+    0 0 40px rgba(255, 107, 107, 0.6),
+    0 0 60px rgba(147, 112, 219, 0.4);
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 1px;
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 20px rgba(255, 215, 0, 0.8),
+      0 0 40px rgba(255, 107, 107, 0.6),
+      0 0 60px rgba(147, 112, 219, 0.4);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(255, 215, 0, 1),
+      0 0 60px rgba(255, 107, 107, 0.8),
+      0 0 90px rgba(147, 112, 219, 0.6);
+  }
+}
+
+.gallery-privacy-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gallery-privacy-badge.public {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.gallery-privacy-badge.friends {
+  background: rgba(155, 89, 182, 0.2);
+  color: #9b59b6;
+  border: 1px solid rgba(155, 89, 182, 0.3);
+}
+
+.gallery-privacy-badge.private {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.header-right {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  padding: 12px 30px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.share-btn {
+  background: linear-gradient(135deg, rgba(106, 90, 205, 0.8), rgba(147, 112, 219, 0.8));
+}
+
+.share-btn:hover {
+  background: linear-gradient(135deg, rgba(106, 90, 205, 0.9), rgba(147, 112, 219, 0.9));
+}
+
+/* ==================== 画廊作者信息 ==================== */
+.gallery-author-info {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: rgba(20, 20, 60, 0.7);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.author-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.detail-author-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--cosmic-purple);
+  object-fit: cover;
+}
+
+.detail-author-details {
+  flex: 1;
+}
+
+.detail-author-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.detail-author-bio {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.author-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.friend-badge-large {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-blue));
+  color: white;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.detail-gallery-stats {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--cosmic-purple);
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==================== 画廊信息区域 ==================== */
+.gallery-info-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .gallery-info-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gallery-description-box,
+.gallery-meta-box {
+  padding: 25px;
+  background: rgba(20, 20, 60, 0.7);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cosmic-purple);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gallery-description-detail {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+@media (max-width: 480px) {
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.meta-value {
+  font-size: 14px;
+  color: white;
+  font-weight: 500;
+}
+
+.theme-badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: white;
+}
+
+.layout-badge {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-size: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* ==================== 画廊作品展示 ==================== */
+.gallery-artworks-display {
+  padding: 25px;
+  margin-bottom: 30px;
+  background: rgba(20, 20, 60, 0.7);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.artworks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.artworks-actions .view-mode-btn {
+  background: linear-gradient(135deg, rgba(106, 90, 205, 0.8), rgba(147, 112, 219, 0.8));
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.artworks-actions .view-mode-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(106, 90, 205, 0.4);
+}
+
+.artworks-container {
+  position: relative;
+  min-height: 600px;
+  border-radius: 15px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.artworks-container.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.artworks-container.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.artwork-display-item {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.artwork-display-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.artwork-frame {
+  width: 100%;
+  height: 100%;
+  border: 15px solid #8B4513;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.artwork-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.artwork-title-small {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.artwork-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.3;
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.artwork-hover-info {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
+  pointer-events: none;
+  z-index: 101;
+}
+
+.artwork-display-item:hover .artwork-hover-info {
+  opacity: 1;
+  bottom: -70px;
+}
+
+.artwork-hover-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.artwork-hover-artist {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ==================== 画廊操作按钮 ==================== */
+.gallery-detail-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 25px;
+  margin-bottom: 30px;
+  background: rgba(20, 20, 60, 0.7);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.like-btn {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.like-btn.liked {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+}
+
+.comment-btn {
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.8), rgba(44, 160, 141, 0.8));
+}
+
+/* ==================== 评论区域 ==================== */
+.gallery-comments {
+  padding: 25px;
+  background: rgba(20, 20, 60, 0.7);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.comments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.comments-count {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.add-comment {
+  margin-bottom: 30px;
+}
+
+.comment-input {
+  width: 100%;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  resize: vertical;
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 14px;
+}
+
+.comment-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.submit-comment-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-blue));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-comment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(106, 90, 205, 0.4);
+}
+
+.empty-comments {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.empty-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.comments-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.comment-item {
+  margin-bottom: 15px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--cosmic-blue);
+  object-fit: cover;
+}
+
+.comment-user-info {
+  flex: 1;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: white;
+  margin-bottom: 3px;
+}
+
+.comment-time {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.comment-content {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.comment-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-like-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.comment-like-btn:hover {
+  border-color: var(--cosmic-purple);
+  color: white;
+}
+
+.comment-like-btn.liked {
+  background: rgba(231, 76, 60, 0.2);
+  border-color: rgba(231, 76, 60, 0.3);
+  color: #e74c3c;
+}
+
+.no-permission {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.no-permission h4 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* ==================== 加载中状态 ==================== */
+.loading-container {
+  padding: 60px 40px;
+  background: rgba(12, 36, 97, 0.9);
+  border-radius: 20px;
+  border: 2px solid rgba(106, 13, 173, 0.5);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-content {
+  max-width: 300px;
+  width: 100%;
+}
+
+.spinner-large {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--cosmic-purple);
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto 30px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+}
+
+/* ==================== 权限错误提示 - 优化版 ==================== */
+.permission-error-container {
+  padding: 60px 40px;
+  background: linear-gradient(135deg,
+    rgba(26, 26, 46, 0.95),
+    rgba(22, 33, 62, 0.9),
+    rgba(15, 52, 96, 0.85));
+  border-radius: 20px;
+  border: 2px solid rgba(15, 52, 96, 0.5);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 25px 50px rgba(26, 26, 46, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(15, 52, 96, 0.4);
+}
+
+.permission-error-content {
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+}
+
+.permission-icon {
+  font-size: 80px;
+  margin-bottom: 30px;
+  animation: gentleFloat 3s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+    opacity: 1;
+  }
+}
+
+.permission-title {
+  font-size: 32px;
+  color: white;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #ff6b6b, #ff9f43);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.permission-message {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  white-space: pre-line;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.permission-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.back-to-community-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ff9f43);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 200px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+.back-to-community-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent);
+  transition: left 0.6s ease;
+}
+
+.back-to-community-btn:hover {
+  background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 25px rgba(255, 107, 107, 0.5),
+    0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+.back-to-community-btn:hover::before {
+  left: 100%;
+}
+
+.back-to-community-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(255, 107, 107, 0.4);
+}
+
+/* ==================== 分享模态框 ==================== */
+.share-gallery-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.share-gallery-modal .modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.share-gallery-modal .modal-content {
+  position: relative;
+  z-index: 2001;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 90%;
+  background: rgba(20, 20, 60, 0.95);
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.close-modal-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.gallery-share-preview {
+  margin-bottom: 20px;
+  border: 2px solid rgba(106, 13, 173, 0.3);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.preview-content {
+  padding: 20px;
+  color: white;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.preview-header h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.privacy-tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.privacy-tag.public {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.privacy-tag.friends {
+  background: rgba(155, 89, 182, 0.2);
+  color: #9b59b6;
+  border: 1px solid rgba(155, 89, 182, 0.3);
+}
+
+.privacy-tag.private {
+  background: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.gallery-description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.gallery-stats-preview {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.gallery-stats-preview span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.gallery-author-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--cosmic-purple);
+}
+
+.share-link {
+  margin-top: 20px;
+}
+
+.link-preview {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.link-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.copy-link-btn {
+  white-space: nowrap;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-blue));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.copy-link-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(106, 90, 205, 0.4);
+}
+
+.link-hint {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* ==================== 复制成功对话框 ==================== */
+.copy-success-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-success-dialog {
+  background: linear-gradient(135deg, rgba(12, 36, 97, 0.95), rgba(23, 37, 95, 0.98));
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 2px solid rgba(106, 13, 173, 0.5);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  backdrop-filter: blur(20px);
+}
+
+.success-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+  animation: gentleFloat 0.5s ease;
+}
+
+.dialog-title {
+  color: white;
+  font-size: 22px;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+  -webkit-text-fill-color: transparent;
+}
+
+.dialog-message {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.dialog-actions .cancel-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 12px 25px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dialog-actions .confirm-btn {
+  background: linear-gradient(135deg, var(--cosmic-purple), var(--cosmic-blue));
+  padding: 12px 25px;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dialog-actions .cancel-btn:hover,
+.dialog-actions .confirm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .gallery-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .detail-gallery-stats {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .stat-item {
+    flex: 1 0 calc(50% - 20px);
+  }
+
+  .gallery-detail-actions {
+    flex-direction: column;
+  }
+
+  .action-btn {
+    justify-content: center;
+  }
+
+  .permission-actions {
+    flex-direction: column;
+  }
+
+  .permission-actions button {
+    width: 100%;
+  }
+
+  .link-preview {
+    flex-direction: column;
+  }
+
+  .copy-link-btn {
+    width: 100%;
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+  }
+
+  .dialog-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .fluorescent-title {
+    font-size: 1.8rem;
+  }
+
+  .detail-author-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .detail-author-name {
+    font-size: 16px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+
+  .permission-title {
+    font-size: 24px;
+  }
+
+  .permission-message {
+    font-size: 16px;
+  }
+
+  .back-to-community-btn {
+    padding: 12px 25px;
+    font-size: 14px;
+  }
+}
+
+/* ==================== 滚动条样式 ==================== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  margin: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg,
+    rgba(78, 205, 196, 0.6),
+    rgba(147, 112, 219, 0.6));
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg,
+    rgba(78, 205, 196, 0.8),
+    rgba(147, 112, 219, 0.8));
+  box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+}
+/* GalleryDetail.css 中的新增样式 */
+
+/* 调试信息样式 */
+.debug-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  z-index: 100;
+  display: none; /* 默认隐藏，开发时可开启 */
+}
+
+.debug-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid red;
+  z-index: 1000;
+  pointer-events: none;
+  display: none; /* 默认隐藏 */
+}
+
+/* 图片加载指示器 */
+.image-loading-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 5px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 🟢【关键修复】作品显示项的CSS */
+.artwork-display-item {
+  position: absolute !important;
+  display: block !important;
+  z-index: 1;
+}
+
+.artwork-display-item .wooden-frame {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  display: block !important;
+}
+
+.artwork-display-item .artwork-content {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  display: block !important;
+}
+
+/* 确保覆盖层不会完全遮盖图片 */
+.artwork-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  z-index: 2;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.artwork-display-item:hover .artwork-overlay {
+  opacity: 0.5;
+}
+
+/* 作品标题样式 */
+.artwork-title-small {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  z-index: 3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 光晕效果 */
+.artwork-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  z-index: 1;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* 悬停信息 */
+.artwork-hover-info {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.artwork-display-item:hover .artwork-hover-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 作品容器确保有正确的位置 */
+.artworks-container {
+  position: relative !important;
+  min-height: 500px !important;
+  width: 100% !important;
+}
+
+/* 开发环境显示调试信息 */
+.development .debug-info,
+.development .debug-frame {
+  display: block;
+}
